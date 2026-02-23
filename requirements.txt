@@ -1,5 +1,7 @@
+
 streamlit
-yfinance
 pandas
+yfinance
 pandas_ta
 plotly
+torch
