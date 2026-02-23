@@ -12,9 +12,9 @@
 import yfinance as yf
 import pandas as pd
 import numpy as np
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
+#import torch
+#import torch.nn as nn
+#import torch.nn.functional as F
 import streamlit as st
 import plotly.graph_objects as go
 import datetime
