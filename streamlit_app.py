@@ -664,18 +664,16 @@ class BTSTExecutor:
             return False
         self.friday.execute_trade(symbol, action, quantity, price)
         self.positions[symbol] = {'entry': price, 'qty': quantity, 'action': action}
-        return True
-            def exit_positions(self):
+        return True   
+    def exit_positions(self):
         """Exit all current positions."""
         for sym in list(self.positions.keys()):
-            # Logic for exiting positions
             pass
 
 # --- DASHBOARD START ---
-# Ye line bilkul left side se chipki honi chahiye (No Spaces)
+# Ye line bilkul left wall se chipki honi chahiye
 dashboard = CustomizableTechnicalAnalysis()
-
 if hasattr(dashboard, 'main'):
-    dashboard.main()
+dashboard.main()
 elif hasattr(dashboard, 'run'):
-    dashboard.run()
+dashboard.run()
