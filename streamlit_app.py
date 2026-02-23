@@ -668,10 +668,17 @@ class BTSTExecutor:
     def exit_positions(self):
         for sym, pos in list(self.positions.items()):
             df = self.friday.d
-if __name__ == "__main__":
-    # Dashboard ko initialize karna
-    app = CustomizableTechnicalAnalysis()
-    # Yahan check karein agar aapke class mein koi main method hai, 
-    # warna ye simple title test ke liye:
-    st.title("🚀 Friday Unified AI Dashboard")
-    st.sidebar.success("Bot is Live!")
+            if __name__ == "__main__":
+    try:
+        # Dashboard ko shuru karne ke liye
+        dashboard = CustomizableTechnicalAnalysis()
+        
+        # Agar aapki class ke andar 'main_loop' ya 'render' naam ka function hai 
+        # toh usey yahan call karna hoga. Aapke code ke hisaab se:
+        if hasattr(dashboard, 'run'):
+            dashboard.run()
+        elif hasattr(dashboard, 'main'):
+            dashboard.main()
+            
+    except Exception as e:
+        st.error(f"Dashboard load nahi ho paya: {e}")
