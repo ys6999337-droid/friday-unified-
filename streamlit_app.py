@@ -689,8 +689,10 @@ if ticker:
         data = yf.download(ticker, period=period)
         if not data.empty:
             # Aapki class ko call kar rahe hain indicators ke liye
-            ta = CustomizableTechnicalAnalysis()
-            df_with_indicators = ta.calculate(data)
+                        # TA-Lib ki jagah pandas_ta use kar rahe hain
+            import pandas_ta as ta_lib
+            data.ta.strategy("Common") # Ye RSI, MACD, SMA sab khud nikal lega
+            df_with_indicators = data
             
             # 3. Graph Dikhana
             st.subheader(f"Price Chart for {ticker}")
