@@ -667,8 +667,7 @@ class BTSTExecutor:
         return True
     def exit_positions(self):
         for sym, pos in list(self.positions.items()):
-            df = self.friday.d
-            # Bilkul left side se shuru karein, koi extra space nahi
+        df = self.friday.data_mgr.get_stock_data(sym)   
 dashboard = CustomizableTechnicalAnalysis()
 
 # Ye line aapke dashboard ko screen par dikhayegi
