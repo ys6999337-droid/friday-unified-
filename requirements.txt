@@ -1,7 +1,7 @@
-
 streamlit
 pandas
 yfinance
 pandas_ta
 plotly
+--index-url https://download.pytorch.org/whl/cpu
 torch
