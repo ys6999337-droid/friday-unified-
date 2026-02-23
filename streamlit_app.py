@@ -672,8 +672,11 @@ class BTSTExecutor:
 
 # --- DASHBOARD START ---
 # Ye line bilkul left wall se chipki honi chahiye
+# Ye line bilkul left se (No space)
 dashboard = CustomizableTechnicalAnalysis()
+
+# Ye lines bhi bilkul left se (No space)
 if hasattr(dashboard, 'main'):
-dashboard.main()
+    dashboard.main()    # <--- Iske shuru mein 4 SPACES dein
 elif hasattr(dashboard, 'run'):
-dashboard.run()
+    dashboard.run()     # <--- Iske shuru mein 4 SPACES dein
