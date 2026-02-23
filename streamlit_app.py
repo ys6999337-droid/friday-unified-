@@ -673,9 +673,6 @@ class BTSTExecutor:
 # --- DASHBOARD START ---
 dashboard = CustomizableTechnicalAnalysis()
 
-if hasattr(dashboard, 'main'):
-    dashboard.main()
-elif hasattr(dashboard, 'run'):
-    dashboard.run()
-else:
-    st.write("Dashboard loading...")
+# --- DASHBOARD START ---
+dashboard = CustomizableTechnicalAnalysis()
+dashboard.main_loop()
