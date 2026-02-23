@@ -6,3 +6,4 @@ torch
 plotly
 transformers
 requests
+TA-Lib
