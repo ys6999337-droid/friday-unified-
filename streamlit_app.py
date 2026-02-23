@@ -666,17 +666,16 @@ class BTSTExecutor:
         self.positions[symbol] = {'entry': price, 'qty': quantity, 'action': action}
         return True
             def exit_positions(self):
-        # Is line ke niche bas 'pass' likh dein taaki error khatam ho jaye
-        for sym, pos in list(self.positions.items()):
-            pass 
+        """Exit all current positions."""
+        for sym in list(self.positions.keys()):
+            # Logic for exiting positions
+            pass
 
-# Ab yahan se dashboard shuru hoga (bilkul left side se)
+# --- DASHBOARD START ---
+# Ye line bilkul left side se chipki honi chahiye (No Spaces)
 dashboard = CustomizableTechnicalAnalysis()
 
-# Ye line aapke dashboard ko screen par dikhayegi
 if hasattr(dashboard, 'main'):
     dashboard.main()
 elif hasattr(dashboard, 'run'):
     dashboard.run()
-else:
-    st.write("Dashboard loading...")
