@@ -668,3 +668,10 @@ class BTSTExecutor:
     def exit_positions(self):
         for sym, pos in list(self.positions.items()):
             df = self.friday.d
+if __name__ == "__main__":
+    # Dashboard ko initialize karna
+    app = CustomizableTechnicalAnalysis()
+    # Yahan check karein agar aapke class mein koi main method hai, 
+    # warna ye simple title test ke liye:
+    st.title("🚀 Friday Unified AI Dashboard")
+    st.sidebar.success("Bot is Live!")
