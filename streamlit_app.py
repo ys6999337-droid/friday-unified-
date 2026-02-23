@@ -668,17 +668,13 @@ class BTSTExecutor:
     def exit_positions(self):
         for sym, pos in list(self.positions.items()):
             df = self.friday.d
-            if __name__ == "__main__":
-    try:
-        # Dashboard ko shuru karne ke liye
-        dashboard = CustomizableTechnicalAnalysis()
-        
-        # Agar aapki class ke andar 'main_loop' ya 'render' naam ka function hai 
-        # toh usey yahan call karna hoga. Aapke code ke hisaab se:
-        if hasattr(dashboard, 'run'):
-            dashboard.run()
-        elif hasattr(dashboard, 'main'):
-            dashboard.main()
-            
-    except Exception as e:
-        st.error(f"Dashboard load nahi ho paya: {e}")
+            # Bilkul left side se shuru karein, koi extra space nahi
+dashboard = CustomizableTechnicalAnalysis()
+
+# Ye line aapke dashboard ko screen par dikhayegi
+if hasattr(dashboard, 'main'):
+    dashboard.main()
+elif hasattr(dashboard, 'run'):
+    dashboard.run()
+else:
+    st.write("Dashboard loading...")
