@@ -82,59 +82,59 @@ except ImportError:
 # 1. AI MODEL – CustomizableBrain
 # =============================================================================
 #class CustomizableBrain(nn.Module):
-    def __init__(self, input_dim=20, model_type='lstm', hidden_size=256,
-                 num_layers=2, dropout=0.2, use_attention=True):
-        super().__init__()
-        self.model_type = model_type
-        self.use_attention = use_attention
+  #  def __init__(self, input_dim=20, model_type='lstm', hidden_size=256,
+      #           num_layers=2, dropout=0.2, use_attention=True):
+  #      super().__init__()
+    #    self.model_type = model_type
+   #     self.use_attention = use_attention
 
-        if model_type == 'simple':
-            self.net = nn.Sequential(
-                nn.Linear(input_dim, hidden_size),
-                nn.ReLU(),
-                nn.Dropout(dropout),
-                nn.Linear(hidden_size, 3)
-            )
-        elif model_type == 'lstm':
-            self.lstm = nn.LSTM(input_dim, hidden_size, num_layers,
-                                batch_first=True, dropout=dropout)
-            if use_attention:
-                self.attention = nn.MultiheadAttention(hidden_size, 4, batch_first=True)
-            self.fc = nn.Linear(hidden_size, 3)
-        elif model_type == 'transformer':
-            encoder_layer = nn.TransformerEncoderLayer(
-                d_model=hidden_size, nhead=4, dim_feedforward=hidden_size*4
-            )
-            self.transformer = nn.TransformerEncoder(encoder_layer, num_layers)
-            self.pos_encoding = nn.Parameter(torch.randn(1, 500, hidden_size))
-            self.fc = nn.Linear(hidden_size, 3)
-        elif model_type == 'cnn':
-            self.conv1 = nn.Conv1d(input_dim, 64, kernel_size=3, padding=1)
-            self.conv2 = nn.Conv1d(64, 128, kernel_size=3, padding=1)
-            self.pool = nn.AdaptiveAvgPool1d(1)
-            self.fc = nn.Linear(128, 3)
+    #    if model_type == 'simple':
+        #    self.net = nn.Sequential(
+       #         nn.Linear(input_dim, hidden_size),
+          #      nn.ReLU(),
+          #      nn.Dropout(dropout),
+         #       nn.Linear(hidden_size, 3)
+ #           )
+    #    elif model_type == 'lstm':
+      #      self.lstm = nn.LSTM(input_dim, hidden_size, num_layers,
+        #                        batch_first=True, dropout=dropout)
+      #      if use_attention:
+       #         self.attention = nn.MultiheadAttention(hidden_size, 4, batch_first=True)
+    #        self.fc = nn.Linear(hidden_size, 3)
+    #    elif model_type == 'transformer':
+       #     encoder_layer = nn.TransformerEncoderLayer(
+    #            d_model=hidden_size, nhead=4, dim_feedforward=hidden_size*4
+        #    )
+    #        self.transformer = nn.TransformerEncoder(encoder_layer, num_layers)
+      #      self.pos_encoding = nn.Parameter(torch.randn(1, 500, hidden_size))
+          #  self.fc = nn.Linear(hidden_size, 3)
+    #    elif model_type == 'cnn':
+        #    self.conv1 = nn.Conv1d(input_dim, 64, kernel_size=3, padding=1)
+        #    self.conv2 = nn.Conv1d(64, 128, kernel_size=3, padding=1)
+         #   self.pool = nn.AdaptiveAvgPool1d(1)
+       #     self.fc = nn.Linear(128, 3)
 
-    def forward(self, x):
-        if self.model_type == 'simple':
-            return self.net(x[:, -1, :])
-        elif self.model_type == 'lstm':
-            lstm_out, _ = self.lstm(x)
-            if self.use_attention:
-                attn_out, _ = self.attention(lstm_out, lstm_out, lstm_out)
-                out = attn_out[:, -1, :]
-            else:
-                out = lstm_out[:, -1, :]
-            return self.fc(out)
-        elif self.model_type == 'transformer':
-            x = x + self.pos_encoding[:, :x.size(1), :]
-            trans_out = self.transformer(x)
-            return self.fc(trans_out[:, -1, :])
-        elif self.model_type == 'cnn':
-            x = x.permute(0, 2, 1)
-            x = F.relu(self.conv1(x))
-            x = F.relu(self.conv2(x))
-            x = self.pool(x).squeeze(-1)
-            return self.fc(x)
+#    def forward(self, x):
+     #   if self.model_type == 'simple':
+   #         return self.net(x[:, -1, :])
+     #   elif self.model_type == 'lstm':
+       #     lstm_out, _ = self.lstm(x)
+         #   if self.use_attention:
+             #   attn_out, _ = self.attention(lstm_out, lstm_out, lstm_out)
+              #  out = attn_out[:, -1, :]
+       #     else:
+     #           out = lstm_out[:, -1, :]
+      #      return self.fc(out)
+   #     elif self.model_type == 'transformer':
+    #        x = x + self.pos_encoding[:, :x.size(1), :]
+        #    trans_out = self.transformer(x)
+     #       return self.fc(trans_out[:, -1, :])
+  #      elif self.model_type == 'cnn':
+    #        x = x.permute(0, 2, 1)
+       #     x = F.relu(self.conv1(x))
+          #  x = F.relu(self.conv2(x))
+         #   x = self.pool(x).squeeze(-1)
+       #     return self.fc(x)
 
 # =============================================================================
 # 2. TECHNICAL INDICATORS – CustomizableTechnicalAnalysis
