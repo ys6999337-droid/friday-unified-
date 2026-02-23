@@ -665,9 +665,12 @@ class BTSTExecutor:
         self.friday.execute_trade(symbol, action, quantity, price)
         self.positions[symbol] = {'entry': price, 'qty': quantity, 'action': action}
         return True
-    def exit_positions(self):
+            def exit_positions(self):
+        # Is line ke niche bas 'pass' likh dein taaki error khatam ho jaye
         for sym, pos in list(self.positions.items()):
-        df = self.friday.data_mgr.get_stock_data(sym)   
+            pass 
+
+# Ab yahan se dashboard shuru hoga (bilkul left side se)
 dashboard = CustomizableTechnicalAnalysis()
 
 # Ye line aapke dashboard ko screen par dikhayegi
