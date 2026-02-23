@@ -81,7 +81,7 @@ except ImportError:
 # =============================================================================
 # 1. AI MODEL – CustomizableBrain
 # =============================================================================
-class CustomizableBrain(nn.Module):
+#class CustomizableBrain(nn.Module):
     def __init__(self, input_dim=20, model_type='lstm', hidden_size=256,
                  num_layers=2, dropout=0.2, use_attention=True):
         super().__init__()
