@@ -1,10 +1,5 @@
-
 streamlit
 yfinance
 pandas
-numpy
-torch
-plotly
-transformers
-requests
 pandas_ta
+plotly
