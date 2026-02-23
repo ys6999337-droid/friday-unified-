@@ -20,7 +20,7 @@ import plotly.graph_objects as go
 import datetime
 import json
 import time
-import talib
+import pandas_ta as ta
 import asyncio
 import warnings
 warnings.filterwarnings('ignore')
