@@ -664,7 +664,7 @@ class BTSTExecutor:
             return False
         self.friday.execute_trade(symbol, action, quantity, price)
         self.positions[symbol] = {'entry': price, 'qty': quantity, 'action': action}
-                return True
+        return True
 
     def exit_positions(self):
         for sym, pos in list(self.positions.items()):
