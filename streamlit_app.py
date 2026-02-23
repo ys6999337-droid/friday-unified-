@@ -670,17 +670,40 @@ class BTSTExecutor:
         for sym, pos in list(self.positions.items()):
             pass
 
-# --- FINAL DASHBOARD EXECUTION ---
+# --- ASLI DASHBOARD ENGINE ---
 import streamlit as st
+import pandas as pd
+import yfinance as yf
 
-st.title("Friday AI Trading Dashboard")
+st.set_page_config(page_title="Friday AI Dashboard", layout="wide")
+st.title("🚀 Friday AI Trading Dashboard")
 
-# Yahan hum check kar rahe hain ki kya dashboard setup taiyaar hai
-try:
-    # Agar aapki class ka naam 'Friday' hai jo sab control karti hai
-    if 'friday' not in locals():
-        st.info("System initialize ho raha hai... Please wait.")
-    else:
-        st.success("System Live!")
-except Exception as e:
-    st.error(f"Dashboard load nahi ho paya: {e}")
+# 1. Sidebar Setup
+st.sidebar.header("Settings")
+ticker = st.sidebar.text_input("Stock Symbol (e.g., RELIANCE.NS)", "RELIANCE.NS")
+period = st.sidebar.selectbox("Timeframe", ["1mo", "3mo", "1y", "5y"])
+
+# 2. Data Fetching & Indicators
+if ticker:
+    try:
+        data = yf.download(ticker, period=period)
+        if not data.empty:
+            # Aapki class ko call kar rahe hain indicators ke liye
+            ta = CustomizableTechnicalAnalysis()
+            df_with_indicators = ta.calculate(data)
+            
+            # 3. Graph Dikhana
+            st.subheader(f"Price Chart for {ticker}")
+            st.line_chart(df_with_indicators['Close'])
+            
+            # 4. Metrics
+            col1, col2 = st.columns(2)
+            with col1:
+                st.metric("Current Price", f"₹{df_with_indicators['Close'].iloc[-1]:.2f}")
+            with col2:
+                st.write("Indicators ready!")
+                
+        else:
+            st.warning("Data nahi mil raha. Symbol sahi se likhein.")
+    except Exception as e:
+        st.error(f"Error: {e}")
