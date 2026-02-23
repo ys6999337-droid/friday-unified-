@@ -673,6 +673,12 @@ class BTSTExecutor:
 # --- DASHBOARD START ---
 dashboard = CustomizableTechnicalAnalysis()
 
-# --- DASHBOARD START ---
-dashboard = CustomizableTechnicalAnalysis()
-dashboard.main_loop()
+# Ye code check karega ki asli function ka naam kya hai
+if hasattr(dashboard, 'main'):
+    dashboard.main()
+elif hasattr(dashboard, 'run'):
+    dashboard.run()
+elif hasattr(dashboard, 'render'):
+    dashboard.render()
+else:
+    st.error("Dashboard function nahi mila. Please class check karein.")
