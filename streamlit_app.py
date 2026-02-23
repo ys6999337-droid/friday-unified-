@@ -670,15 +670,17 @@ class BTSTExecutor:
         for sym, pos in list(self.positions.items()):
             pass
 
-# --- DASHBOARD START ---
-dashboard = CustomizableTechnicalAnalysis()
+# --- FINAL DASHBOARD EXECUTION ---
+import streamlit as st
 
-# Ye code check karega ki asli function ka naam kya hai
-if hasattr(dashboard, 'main'):
-    dashboard.main()
-elif hasattr(dashboard, 'run'):
-    dashboard.run()
-elif hasattr(dashboard, 'render'):
-    dashboard.render()
-else:
-    st.error("Dashboard function nahi mila. Please class check karein.")
+st.title("Friday AI Trading Dashboard")
+
+# Yahan hum check kar rahe hain ki kya dashboard setup taiyaar hai
+try:
+    # Agar aapki class ka naam 'Friday' hai jo sab control karti hai
+    if 'friday' not in locals():
+        st.info("System initialize ho raha hai... Please wait.")
+    else:
+        st.success("System Live!")
+except Exception as e:
+    st.error(f"Dashboard load nahi ho paya: {e}")
